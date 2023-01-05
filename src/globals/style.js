@@ -1,6 +1,7 @@
 module.exports = {
     colors: {
         col1: 'white',
+        col2: 'black',
         text1: 'red',
         text2: 'grey',
     },
@@ -11,7 +12,7 @@ module.exports = {
     btn: {
         width: '80%',
         height: 50,
-        backgroundColor: 'red',
+        backgroundColor: 'white',
         borderRadius: 10,
         alignItem: 'center',
         justifyContent: 'center',
