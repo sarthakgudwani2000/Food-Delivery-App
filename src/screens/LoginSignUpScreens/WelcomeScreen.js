@@ -3,10 +3,20 @@ import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import logo from '../../../assets/Logo.png'
 import { colors, hr80 } from '../../globals/style';
 
-
-
+import { useFonts } from 'expo-font';
+import AppLoading from 'expo-app-loading';
 
 const WelcomeScreen = () => {
+ 
+  let [fontsLoaded] = useFonts({
+    'Metropolis-Bold': require('../../../assets/fonts/Metropolis-Bold.ttf'),
+    'Metropolis-SemiBold': require('../../../assets/fonts/Metropolis-SemiBold.ttf'),
+  });
+  
+  if (!fontsLoaded) {
+    return <AppLoading />;
+  }
+  
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Welcome to Yummie</Text>
@@ -42,11 +52,11 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 50,
-    color: 'white',
+    color: colors.col1,
     textAlign: 'center',
     marginVertical: 10,
     fontWeight: '200',
-    // fontFamily: 'LibreBaskerville-Bold',
+    fontFamily: 'Metropolis-Bold',
   },
   logoout: {
     width: "80%",
@@ -60,22 +70,22 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 18,
     width: '80%',
-    color: 'white',
+    color: colors.col1,
     textAlign: 'center',
-    // fontFamily: 'Metropolis-SemiBold',
+    fontFamily: 'Metropolis-SemiBold',
   },
   btnout: {
     flexDirection: 'row',
   },
   btn: {
     fontSize: 20,
-    color: '00f',
+    color: colors.col2,
     textAlign: 'center',
     marginVertical: 30,
     marginHorizontal: 10,
     fontWeight: '700',
     backgroundColor: '#fff',
-    borderRadius: 10,
+    borderRadius: 15,
     padding: 10,
     paddingHorizontal: 20,
   },
