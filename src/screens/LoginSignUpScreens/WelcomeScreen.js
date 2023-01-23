@@ -1,24 +1,29 @@
 import React from 'react'
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import logo from '../../../assets/Logo.png'
+// import dark_mode from '../../../assets/dark_mode.png'
 import { colors, hr80 } from '../../globals/style';
-
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 
-const WelcomeScreen = () => {
- 
+const WelcomeScreen = ({ navigation }) => {
+
   let [fontsLoaded] = useFonts({
     'Metropolis-Bold': require('../../../assets/fonts/Metropolis-Bold.ttf'),
     'Metropolis-SemiBold': require('../../../assets/fonts/Metropolis-SemiBold.ttf'),
   });
-  
+
   if (!fontsLoaded) {
     return <AppLoading />;
   }
-  
+
   return (
     <View style={styles.container}>
+   
+      {/* <View style={styles.darkmode}>
+        <Image source={dark_mode} style={styles.darkmode} />
+      </View> */}
+
       <Text style={styles.title}>Welcome to Yummie</Text>
 
       <View style={styles.logoout}>
@@ -30,10 +35,10 @@ const WelcomeScreen = () => {
       <View style={hr80} />
 
       <View style={styles.btnout}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('signup')}>
           <Text style={styles.btn}>Sign up</Text>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('login')}>
           <Text style={styles.btn}>Log In</Text>
         </TouchableOpacity>
       </View>
@@ -79,7 +84,7 @@ const styles = StyleSheet.create({
   },
   btn: {
     fontSize: 20,
-    color: colors.col2,
+    color: colors.text3,
     textAlign: 'center',
     marginVertical: 30,
     marginHorizontal: 10,
