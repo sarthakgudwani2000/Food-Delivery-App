@@ -1,28 +1,30 @@
 module.exports = {
     colors: {
         col1: 'white',
-        col2: 'black',
         text1: 'red',
         text2: 'grey',
+        text3: 'black',
     },
-    title: {
-        title1:  '30',
-        btntext: '20',
+    titles: {
+        title1:  30,
+        btntext: 20,
     },
-    btn: {
+    btn1: {
         width: '80%',
         height: 50,
-        backgroundColor: 'white',
+        backgroundColor: 'red',
         borderRadius: 10,
-        alignItem: 'center',
+        alignItems: 'center',
         justifyContent: 'center',
         elevation: 10,
         color: 'white',
+        marginBottom: 10,
+        marginTop: 20,
     },
     hr80: {
         width: '80%',
         borderBottomColor: '#E0E0E0',
         borderBottomWidth: 1,
         marginVertical: 20,
-    }
+    },
 }
