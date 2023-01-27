@@ -8,6 +8,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 
+
 const SignupScreen = ({ navigation }) => {
     const [emailfocus, setEmailfocus] = useState(false);
     const [passwordfocus, setPasswordfocus] = useState(false);
@@ -16,6 +17,7 @@ const SignupScreen = ({ navigation }) => {
     const [showpassword, setShowpassword] = useState(false);
     const [showcpassword, setShowcpassword] = useState(false);
     const [cpasswordfocus, setcPasswordfocus] = useState(false);
+    const [addressfocus, setAddressFocus] = useState(false)
 
     return (
         <ScrollView>
@@ -31,6 +33,7 @@ const SignupScreen = ({ navigation }) => {
                             setNamefocus(true)
                             setPhonefocus(false)
                             setcPasswordfocus(false)
+                            setAddressFocus(false)
                         }}
                         />
                     </View>
@@ -45,6 +48,7 @@ const SignupScreen = ({ navigation }) => {
                             setNamefocus(false)
                             setPhonefocus(false)
                             setcPasswordfocus(false)
+                            setAddressFocus(false)
                         }}
                         />
                     </View>
@@ -58,6 +62,7 @@ const SignupScreen = ({ navigation }) => {
                             setNamefocus(false)
                             setPhonefocus(true)
                             setcPasswordfocus(false)
+                            setAddressFocus(false)
                         }}
                         />
                     </View>
@@ -71,6 +76,7 @@ const SignupScreen = ({ navigation }) => {
                             setShowpassword(false)
                             setNamefocus(false)
                             setPhonefocus(false)
+                            setAddressFocus(false)
                         }}
                             secureTextEntry={showpassword === false ? true : false}
                         />
@@ -87,6 +93,7 @@ const SignupScreen = ({ navigation }) => {
                             setcPasswordfocus(true)
                             setNamefocus(false)
                             setPhonefocus(false)
+                            setAddressFocus(false)
                         }}
                             secureTextEntry={showcpassword === false ? true : false}
                         />
@@ -94,17 +101,20 @@ const SignupScreen = ({ navigation }) => {
                         <Octicons name={showcpassword == false ? "eye-closed" : "eye"} size={24} color="black" onPress={() => setShowcpassword(!showcpassword)} />
                     </View>
 
-                    <Text style={styles.address}>Please enter your address</Text>
+                    {/* <Text style={styles.address}></Text> */}
                     <View style={styles.inputout} >
-                        <TextInput style={styles.input1} placeholder="Enter your Address"
-                            onPress={() => {
-                                setEmailfocus(false)
-                                setPasswordfocus(false)
-                                setShowpassword(false)
-                                setNamefocus(false)
-                                setPhonefocus(false)
-                            }}
+                        <Entypo name="home" size={24} color={addressfocus === true ? colors.text1 : colors.text2} />
+                        <TextInput style={styles.input} placeholder="Address" onFocus={() => {
+                            setEmailfocus(false)
+                            setPasswordfocus(false)
+                            setShowpassword(false)
+                            setcPasswordfocus(false)
+                            setNamefocus(false)
+                            setPhonefocus(false)
+                            setAddressFocus(true)
+                        }}
                         />
+
                     </View>
 
 
