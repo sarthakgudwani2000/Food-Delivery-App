@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "359074842218",
+    "project_id": "yummie-953c2",
+    "storage_bucket": "yummie-953c2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:359074842218:android:412133fef1185efd6eec13",
+        "android_client_info": {
+          "package_name": "com.Yummie"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "359074842218-giq6rv5oga2rsc2of1dka7387is34028.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgKyaUgQCdw5TGrafT80lqq_IiT2so8Us"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "359074842218-giq6rv5oga2rsc2of1dka7387is34028.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

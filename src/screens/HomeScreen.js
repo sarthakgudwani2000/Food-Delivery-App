@@ -1,26 +1,94 @@
-import { StyleSheet, View, Text, StatusBar, TextInput } from 'react-native'
-import React from 'react'
-import HomeHeaddNav from '../components/HomeHeaddNav'
+import { StyleSheet, Text, View, StatusBar, TextInput, FlatList, Image, ScrollView, Dimensions } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import HomeHeadNav from '../components/HomeHeaddNav'
 import Categories from '../components/Categories'
 import OfferSlider from '../components/OfferSlider'
 import { AntDesign } from '@expo/vector-icons';
-import { colors } from '../globals/style';
+import { colors, veg, nonveg } from '../globals/style'
 
-const HomeScreen = () => {
-  return (
-    <View style={styles.container}>
-        <StatusBar />
-        <HomeHeaddNav />
-        <View style={styles.searchbox}>
-        <AntDesign name="search1" size={24} color="black" style={styles.searchicon} />
-            <TextInput style={styles.input} placeholder='Search' /> 
+import { firebase } from '../../Firebase/firebaseConfig'
+import Cardslider from '../components/Cardslider'
+// import BottomNav from '../components/BottomNav'
+// import { windowHeight } from '../components/BottomNav'
+
+const HomeScreen = ({ navigation }) => {
+
+    const [foodData, setFoodData] = useState([]);
+    const [VegData, setVegData] = useState([]);
+    const [NonVegData, setNonVegData] = useState([]);
+
+
+    const foodRef = firebase.firestore().collection('FoodData');
+
+    useEffect(() => {
+        foodRef.onSnapshot(snapshot => {
+            setFoodData(snapshot.docs.map(doc => doc.data()))
+        }
+        )
+    }, [])
+
+    useEffect(() => {
+        setVegData(foodData.filter((item) => item.foodType == 'veg'))
+        setNonVegData(foodData.filter((item) => item.foodType == 'non-veg'))
+    }, [foodData])
+
+
+
+    const [search, setSearch] = useState('')
+
+    return (
+        <View style={styles.container}>
+            <StatusBar />
+
+            <HomeHeadNav navigation={navigation} />
+
+            {/* <View style={styles.bottomnav}>
+                <BottomNav navigation={navigation} />
+            </View> */}
+
+
+            <ScrollView>
+                <View style={styles.searchbox}>
+                    <AntDesign name="search1" size={24} color="black" style={
+                        styles.searchicon
+                    } />
+                    <TextInput style={styles.input} placeholder="Search" onChangeText={(e) => {
+                        setSearch(e)
+                    }} />
+
+                </View>
+                {search != '' && <View style={styles.seacrhresultsouter}>
+                    <FlatList style={styles.searchresultsinner} data={foodData} renderItem={
+                        ({ item }) => {
+                            if (item.foodName.toLowerCase().includes(search.toLowerCase())) {
+                                return (
+                                    <ScrollView
+                                        horizontal = {true}
+                                        showsHorizontalScrollIndicator={false}
+                                        pagingEnabled = {true} >
+                                            
+                                        <View style={styles.searchresult}>
+                                            <AntDesign name="arrowright" size={24} color="black" />
+                                            <Text style={styles.searchresulttext}>{item.foodName}</Text>
+                                        </View>
+                                    </ScrollView>
+                                )
+                            }
+                        }
+                    } />
+                </View>}
+                <Categories />
+                <OfferSlider />
+
+                <Cardslider title={"Today's Special"} data={foodData} navigation={navigation} />
+                <Cardslider title={"Non-Veg"} data={NonVegData} navigation={navigation} />
+                <Cardslider title={"Veg"} data={VegData} navigation={navigation} />
+            </ScrollView>
+
+
         </View>
-        <Categories />
-        <OfferSlider />
-    </View>
-  )
+    )
 }
-
 
 
 const styles = StyleSheet.create({
@@ -51,5 +119,32 @@ const styles = StyleSheet.create({
     searchicon: {
         color: colors.text1,
     },
+    seacrhresultsouter: {
+        width: '80%',
+        marginHorizontal: 30,
+        height: '100%',
+        backgroundColor: colors.col1,
+    },
+    searchresultsinner: {
+        width: '100%',
+    },
+    searchresult: {
+        width: '100%',
+        flexDirection: 'row',
+        // alignItems: 'center',
+        padding: 5,
+    },
+    searchresulttext: {
+        marginLeft: 10,
+        fontSize: 18,
+        color: colors.text1,
+    },
+    bottomnav: {
+        position: 'absolute',
+        bottom: 0,
+        width: '100%',
+        backgroundColor: colors.col1,
+        zIndex: 20,
+    }
 })
 export default HomeScreen
