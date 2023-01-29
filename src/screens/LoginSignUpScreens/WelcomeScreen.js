@@ -1,12 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
 import logo from '../../../assets/Logo.png'
 // import dark_mode from '../../../assets/dark_mode.png'
 import { colors, hr80 } from '../../globals/style';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
+import { firebase } from '../../../Firebase/firebaseConfig'
 
 const WelcomeScreen = ({ navigation }) => {
+
+  const [userlogged, setUserlogged] = useState(null);
+
+  useEffect(() => {
+    const checklogin = () => {
+      firebase.auth().onAuthStateChanged((user) => {
+        // console.log(user);
+        if (user) {
+          // navigation.navigate('home');
+          setUserlogged(user);
+        } else {
+          // No user is signed in.
+          console.log('no user');
+        }
+      });
+    }
+    checklogin();
+  }, [])
 
   let [fontsLoaded] = useFonts({
     'Metropolis-Bold': require('../../../assets/fonts/Metropolis-Bold.ttf'),
@@ -17,9 +36,21 @@ const WelcomeScreen = ({ navigation }) => {
     return <AppLoading />;
   }
 
+
+  const handlelogout = () => {
+    firebase.auth().signOut().then(() => {
+        // Sign-out successful.
+        setUserlogged(null);
+        console.log('signed out');
+    }).catch((error) => {
+        // An error happened.
+        console.log(error);
+    });
+}
+
   return (
     <View style={styles.container}>
-   
+
       {/* <View style={styles.darkmode}>
         <Image source={dark_mode} style={styles.darkmode} />
       </View> */}
@@ -34,14 +65,29 @@ const WelcomeScreen = ({ navigation }) => {
       <Text style={styles.text}>Find the best food around you at lowest price.</Text>
       <View style={hr80} />
 
-      <View style={styles.btnout}>
-        <TouchableOpacity onPress={() => navigation.navigate('signup')}>
-          <Text style={styles.btn}>Sign up</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('login')}>
-          <Text style={styles.btn}>Log In</Text>
-        </TouchableOpacity>
-      </View>
+      {userlogged === null ?
+
+        <View style={styles.btnout}>
+          <TouchableOpacity onPress={() => navigation.navigate('signup')}>
+            <Text style={styles.btn}>Sign UP</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('login')}>
+            <Text style={styles.btn}>Log In</Text>
+          </TouchableOpacity>
+        </View>
+        :
+        <View style={styles.logged}>
+          <Text style={styles.txtlog}>Signed in as <Text style={styles.txtlogin}>{userlogged.email}</Text></Text>
+          <View style={styles.btnout}>
+            <TouchableOpacity onPress={() => navigation.navigate('home')}>
+              <Text style={styles.btn}>Next</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => handlelogout()}>
+              <Text style={styles.btn}>Log Out</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      }
     </View>
   )
 }
@@ -94,6 +140,22 @@ const styles = StyleSheet.create({
     padding: 10,
     paddingHorizontal: 20,
   },
+  logged: {
+    alignItems: 'center',
+
+},
+txtlog: {
+    fontSize: 16,
+    color: colors.col1,
+},
+txtlogin: {
+    fontSize: 16,
+    color: colors.col1,
+    fontWeight: '700',
+    textDecorationStyle: 'solid',
+    textDecorationLine: 'underline',
+}
+
 
 })
 
