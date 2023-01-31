@@ -10,7 +10,7 @@ const HomeHeadNav = ({ navigation }) => {
         <View style={styles.container}>
             <Fontisto name="nav-icon-list-a" size={20} color="black" style={styles.myicon} />
             <View style={styles.containerin}>
-                <Text style={styles.mytext}>Yummie</Text>
+                <Text style={styles.mytext}>Foodie</Text>
                 <MaterialCommunityIcons name="food-outline" size={26} color="black" style={styles.myicon} />
             </View>
             <TouchableOpacity onPress={() => { navigation.navigate('userprofile') }}>

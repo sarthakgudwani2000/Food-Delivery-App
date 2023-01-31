@@ -6,6 +6,8 @@ import LoginScreen from './src/screens/LoginSignUpScreens/LoginScreen';
 import HomeScreen from './src/screens/HomeScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Userprofile from './src/screens/Userprofile';
+import Productpage from './src/screens/Productpage';
 
 export default function App() {
   const Stack = createNativeStackNavigator();
@@ -31,6 +33,18 @@ export default function App() {
         />
 
         <Stack.Screen name="home" component={HomeScreen}
+          options={{
+            headerShown: false,
+          }}
+        />
+
+        <Stack.Screen name="userprofile" component={Userprofile}
+          options={{
+            headerShown: false,
+          }}
+        />
+
+        <Stack.Screen name="productpage" component={Productpage}
           options={{
             headerShown: false,
           }}
