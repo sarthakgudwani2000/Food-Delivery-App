@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, TextInput, TouchableOpacity, View, ScrollView } from 'react-native'
+import { StyleSheet, Text, TextInput, TouchableOpacity, View, ScrollView, StatusBar } from 'react-native'
 import { titles, colors, btn1, hr80 } from '../../globals/style'
 import { AntDesign } from '@expo/vector-icons';
 import { Octicons } from '@expo/vector-icons';
@@ -10,6 +10,7 @@ import { Entypo } from '@expo/vector-icons';
 
 
 import { firebase } from '../../../Firebase/firebaseConfig'
+
 
 const SignupScreen = ({ navigation }) => {
     const [emailfocus, setEmailfocus] = useState(false);
@@ -146,6 +147,7 @@ const SignupScreen = ({ navigation }) => {
     return (
         <ScrollView>
             <View style={styles.container}>
+                <StatusBar />
                 {successmsg == null ?
                     <View style={styles.container}>
                         <Text style={styles.head1}>Sign Up</Text>
@@ -316,7 +318,7 @@ const styles = StyleSheet.create({
         height: '100%',
         alignItems: 'center',
         // justifyContent: 'center',
-        marginTop: 10,
+        // marginTop: 10,
     },
     container1: {
         flex: 1,

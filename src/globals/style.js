@@ -22,7 +22,7 @@ module.exports = {
         marginBottom: 10,
     },
     btn2: {
-        width: 150,
+        width: 180,
         height: 50,
         backgroundColor: 'red',
         borderRadius: 10,
