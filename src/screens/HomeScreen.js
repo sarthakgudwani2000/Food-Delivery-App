@@ -8,6 +8,7 @@ import { colors, veg, nonveg } from '../globals/style'
 
 import { firebase } from '../../Firebase/firebaseConfig'
 import Cardslider from '../components/Cardslider'
+import BottomNav from '../components/BottomNav'
 // import BottomNav from '../components/BottomNav'
 // import { windowHeight } from '../components/BottomNav'
 
@@ -42,9 +43,9 @@ const HomeScreen = ({ navigation }) => {
 
             <HomeHeadNav navigation={navigation} />
 
-            {/* <View style={styles.bottomnav}>
+            <View style={styles.bottomnav}>
                 <BottomNav navigation={navigation} />
-            </View> */}
+            </View>
 
 
             <ScrollView>
