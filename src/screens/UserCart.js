@@ -32,15 +32,26 @@ const UserCart = ({ navigation }) => {
             const foodprice = JSON.parse(cartdata).cart;
             let totalfoodprice = 0;
             foodprice.map((item) => {
-                // console.log(item.data.foodPrice)
-                totalfoodprice = (parseInt(item.data.foodPrice) * parseInt(item.Foodquantity)) +
-                    (parseInt(item.data.foodAddonPrice) * parseInt(item.Addonquantity)) + totalfoodprice;
+            //     console.log("Food Price",item.data.foodPrice)
+            //     console.log("Food Quantity",item.Foodquantity)
+            //     console.log("Food Add On Price",item.data.foodAddonPrice)
+            //     console.log("Food Add On Quantity",item.foodAddonquantity)
+                // console.log("Data Type of Food Price",typeof(item.data.foodPrice))
+                // console.log("Data Type of Food Quantity",typeof(item.Foodquantity))
+                // console.log("Data Type of Food Add On Price",typeof(item.data.foodAddonPrice))
+                // console.log("Data Type of Food Add On Quantity",typeof(item.foodAddonquantity))
+            //     console.log("Food Total Price (before adding the item in the cart) :", totalfoodprice)
+
+                    var  adon = (parseInt(item.data.foodAddonPrice) * parseInt(item.Addonquantity));
+
+                adon = (adon === undefined ? 0 : adon);
+                totalfoodprice += (parseInt(item.data.foodPrice) * parseInt(item.Foodquantity));                     
             })
-            // console.log(totalfoodprice)
+            // console.log("Food Total Price (after adding the item in the cart) :", totalfoodprice)
             setTotalCost(JSON.stringify(totalfoodprice))
         }
     }, [cartdata])
-    // console.log(cartdata)
+    // console.log("Card Data: ",cartdata)
 
     // console.log(JSON.parse(cartdata).cart[0].data);
 
@@ -100,12 +111,6 @@ const UserCart = ({ navigation }) => {
                             }
                         } />}
                 </View>
-
-
-                <View style={styles.c5}>
-                    <View style={hr80}></View>
-                </View>
-
                 <View style={styles.btncont}>
                     <View style={styles.c3}>
                         <Text style={styles.txt5}>Total</Text>
@@ -119,6 +124,7 @@ const UserCart = ({ navigation }) => {
         </View>
     )
 }
+
 
 export default UserCart
 
@@ -188,8 +194,7 @@ const styles = StyleSheet.create({
     cartout: {
         flex: 1,
         width: '100%',
-        alignItems: 'center',
-        alignSelf: 'center',
+        height: 50,
     },
     btntxt: {
         backgroundColor: colors.text1,
@@ -228,27 +233,24 @@ const styles = StyleSheet.create({
         padding: 5,
     },
     txt1: {
-        fontSize: 15,
+        fontSize: 16,
         color: colors.text1,
-        width: '52%',
+        width: '60%',
         fontWeight: 'bold',
     },
     txt2: {
-        fontSize: 15,
+        fontSize: 16,
         color: colors.text3,
         fontWeight: 'bold',
-        marginRight: 15,
-
     },
     c2: {
         backgroundColor: colors.text1,
         borderRadius: 10,
-        width: '85%',
+        width: '100%',
         alignItems: 'center',
         justifyContent: 'space-between',
         padding: 5,
         flexDirection: 'row',
-        marginRight: 15,
     },
     txt3: {
         fontSize: 15,
@@ -273,17 +275,14 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        width: 110,
+        width: 100,
         borderRadius: 10,
         borderColor: colors.text1,
         borderWidth: 1,
-        marginVertical: 11,
+        marginVertical: 10,
         padding: 5,
     },
     del: {
         color: colors.text1,
-    },
-    c5: {
-        alignItems: 'center',
     }
 })
