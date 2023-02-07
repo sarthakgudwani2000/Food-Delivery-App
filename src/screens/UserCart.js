@@ -44,8 +44,9 @@ const UserCart = ({ navigation }) => {
 
                     var  adon = (parseInt(item.data.foodAddonPrice) * parseInt(item.Addonquantity));
 
-                adon = (adon === undefined ? 0 : adon);
-                totalfoodprice += (parseInt(item.data.foodPrice) * parseInt(item.Foodquantity));                     
+                adon = (!adon ? 0 : adon);
+                console.log(adon);
+                totalfoodprice += (parseInt(item.data.foodPrice) * parseInt(item.Foodquantity) + adon );                     
             })
             // console.log("Food Total Price (after adding the item in the cart) :", totalfoodprice)
             setTotalCost(JSON.stringify(totalfoodprice))
