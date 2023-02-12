@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native'
 import React from 'react'
 import { Fontisto } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -10,8 +10,10 @@ const HomeHeadNav = ({ navigation }) => {
         <View style={styles.container}>
             <Fontisto name="nav-icon-list-a" size={20} color="black" style={styles.myicon} />
             <View style={styles.containerin}>
+
+            <Image source={require('../../assets/App_Logo.png')} style={styles.image} />
                 <Text style={styles.mytext}>Foodie</Text>
-                <MaterialCommunityIcons name="food-outline" size={26} color="black" style={styles.myicon} />
+                {/* <MaterialCommunityIcons name="food-outline" size={26} color="black" style={styles.myicon} /> */}
             </View>
             <TouchableOpacity onPress={() => { navigation.navigate('userprofile') }}>
                 <FontAwesome5 name="user-circle" size={26} color="black" style={styles.myicon} />
@@ -45,4 +47,10 @@ const styles = StyleSheet.create({
         color: colors.text1,
         fontSize: 24,
     },
+    image: {
+        width: 70,
+        marginTop: 10,
+        marginRight:-7,
+        height: 38,
+      },
 })
