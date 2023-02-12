@@ -62,7 +62,7 @@ const Placeorder = ({ navigation, route }) => {
 
 
             // varparseInt(item.Addonquantity) * parseInt(item.data.foodAddonPrice
-                
+
             let totalfoodprice = 0;
 
             foodprice.map((item) => {
@@ -75,10 +75,10 @@ const Placeorder = ({ navigation, route }) => {
                 // {
                 //     adon2 = "₹" + adon;
                 // }
-   
-                console.log(adon);
 
-                totalfoodprice += (parseInt(item.data.foodPrice) * parseInt(item.Foodquantity) + adon );    
+                // console.log(adon);
+
+                totalfoodprice += (parseInt(item.data.foodPrice) * parseInt(item.Foodquantity) + adon);
             })
             // console.log(totalfoodprice)
             setTotalCost(JSON.stringify(totalfoodprice))
@@ -106,6 +106,7 @@ const Placeorder = ({ navigation, route }) => {
         alert('Order Placed Successfully');
         // navigation.navigate('trackorders');
     }
+    //
 
     return (
         <ScrollView style={styles.containerout}>
@@ -117,38 +118,99 @@ const Placeorder = ({ navigation, route }) => {
             <View style={styles.container}>
 
                 <Text style={styles.head1}>Your Order Summary</Text>
+
                 <FlatList style={styles.c1} data={orderdata.cart} renderItem={
                     ({ item }) => {
-                        return (
-                            <View style={styles.rowout}>
-                                <ScrollView
-                                    horizontal={true}
-                                    showsHorizontalScrollIndicator={false}
-                                    pagingEnabled={true} >
+                        console.log(item.Addonquantity);
+                        if (item.Addonquantity == 0) {
+                            return (
+                                <View style={styles.rowout}>
+                                    <ScrollView
+                                        horizontal={true}
+                                        showsHorizontalScrollIndicator={false}
+                                        pagingEnabled={true} >
+
+                                        <View style={styles.row}>
+                                            <View style={styles.left}>
+                                                <Text style={styles.qty}>{item.Foodquantity}</Text>
+                                                <Text style={styles.title}>{item.data.foodName}</Text>
+                                                <Text style={styles.price1}>₹{item.data.foodPrice}</Text>
+                                            </View>
+                                            <View style={styles.right}>
+                                                <Text style={styles.totalprice}>₹{parseInt(item.Foodquantity) * parseInt(item.data.foodPrice)}</Text>
+                                            </View>
+                                        </View>
+                                    </ScrollView>
+
+                                    {/* if (!item.data.foodAddon == "") */}
+                                    {/* { */}
+
+                                    {/* console.log((typeof(item.Addonquantity)) */}
+                                    {/* if (parseInt(item.Addonquantity))
+                                    { */}
+
+                                    {/* <View style={styles.row}>
+                                        <View style={styles.left}>
+                                            <Text style={styles.qty}>{item.Addonquantity}</Text>
+                                            <Text style={styles.title}>{item.data.foodAddon}</Text>
+                                            <Text style={styles.price1}>₹{item.data.foodAddonPrice}</Text>
+                                        </View>
+
+                                        <View style={styles.right}>
+                                            <Text style={styles.totalprice}>₹{item.Addonquantity * item.data.foodAddonPrice}</Text>
+                                        </View>
+                                    </View> */}
+                                    {/* } */}
+
+                                </View>
+                            )
+                        }
+                        else 
+                        {
+                            return (
+                                <View style={styles.rowout}>
+                                    <ScrollView
+                                        horizontal={true}
+                                        showsHorizontalScrollIndicator={false}
+                                        pagingEnabled={true} >
+
+                                        <View style={styles.row}>
+                                            <View style={styles.left}>
+                                                <Text style={styles.qty}>{item.Foodquantity}</Text>
+                                                <Text style={styles.title}>{item.data.foodName}</Text>
+                                                <Text style={styles.price1}>₹{item.data.foodPrice}</Text>
+                                            </View>
+                                            <View style={styles.right}>
+                                                <Text style={styles.totalprice}>₹{parseInt(item.Foodquantity) * parseInt(item.data.foodPrice)}</Text>
+                                            </View>
+                                        </View>
+                                    </ScrollView>
+
+                                    {/* if (!item.data.foodAddon == "") */}
+                                    {/* { */}
+
+                                    {/* console.log((typeof(item.Addonquantity)) */}
+                                    {/* if (parseInt(item.Addonquantity))
+                                    { */}
+
                                     <View style={styles.row}>
                                         <View style={styles.left}>
-                                            <Text style={styles.qty}>{item.Foodquantity}</Text>
-                                            <Text style={styles.title}>{item.data.foodName}</Text>
-                                            <Text style={styles.price1}>₹{item.data.foodPrice}</Text>
+                                            <Text style={styles.qty}>{item.Addonquantity}</Text>
+                                            <Text style={styles.title}>{item.data.foodAddon}</Text>
+                                            <Text style={styles.price1}>₹{item.data.foodAddonPrice}</Text>
                                         </View>
-                                        <View style={styles.right}>
-                                            <Text style={styles.totalprice}>₹{parseInt(item.Foodquantity) * parseInt(item.data.foodPrice)}</Text>
-                                        </View>
-                                    </View>
-                                </ScrollView>
 
-                                <View style={styles.row}>
-                                    <View style={styles.left}>
-                                        <Text style={styles.qty}>{item.Addonquantity}</Text>
-                                        <Text style={styles.title}>{item.data.foodAddon}</Text>
-                                        <Text style={styles.price1}>₹{item.data.foodAddonPrice}</Text>
+                                        <View style={styles.right}>
+                                            <Text style={styles.totalprice}>₹{item.Addonquantity * item.data.foodAddonPrice}</Text>
+                                        </View>
                                     </View>
-                                    <View style={styles.right}>
-                                        <Text style={styles.totalprice}>₹{item.Addonquantity * item.data.foodAddonPrice}</Text>
-                                    </View>
+                                    {/* } */}
+
                                 </View>
-                            </View>
-                        )
+                            )
+                        }
+
+
                     }
                 } />
                 <View style={hr80}>
@@ -217,6 +279,12 @@ const Placeorder = ({ navigation, route }) => {
     )
 }
 
+
+
+
+
+
+
 export default Placeorder
 
 const styles = StyleSheet.create({
@@ -283,8 +351,6 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 10,
         padding: 5,
-        // marginRight:50,
-        // marginRight: 10,
     },
     btntext: {
         fontSize: 20,
@@ -293,3 +359,79 @@ const styles = StyleSheet.create({
         margin: 10,
     }
 })
+
+
+// const styles = StyleSheet.create({
+
+//     container: {
+//         flexDirection: 'column',
+//         alignItems: 'center',
+//     },
+//     head1: {
+//         fontSize: 30,
+//         fontWeight: '200',
+//         color: colors.text1,
+//         margin: 10,
+//         textAlign: 'center'
+//     },
+//     row: {
+//         flexDirection: 'row',
+//         alignItems: 'center',
+//         marginVertical: 5,
+//         justifyContent: 'space-between',
+//     },
+//     rowout: {
+//         flexDirection: 'column',
+//         margin: 10,
+//         elevation: 10,
+//         backgroundColor: colors.col1,
+//         padding: 10,
+//         borderRadius: 10,
+//     },
+
+//     qty: {
+//         width: 40,
+//         height: 30,
+//         backgroundColor: colors.text1,
+//         borderRadius: 10,
+//         textAlign: 'center',
+//         textAlignVertical: 'center',
+//         marginRight: 10,
+//         color: colors.col1,
+//         fontSize: 17,
+//         fontWeight: 'bold',
+//     },
+//     title: {
+//         fontSize: 17,
+//         fontWeight: 'bold',
+//         marginRight: 10,
+//     },
+//     price1: {
+//         fontSize: 17,
+//         fontWeight: 'bold',
+//         marginRight: 10,
+//         color: colors.text1,
+//     },
+//     left: {
+//         flexDirection: 'row',
+//     },
+//     right: {
+//         flexDirection: 'row',
+//     },
+//     totalprice: {
+//         fontSize: 17,
+//         fontWeight: 'bold',
+//         borderColor: colors.text1,
+//         borderWidth: 1,
+//         borderRadius: 10,
+//         padding: 5,
+//         // marginRight:50,
+//         // marginRight: 10,
+//     },
+//     btntext: {
+//         fontSize: 20,
+//         fontWeight: 'bold',
+//         color: colors.col1,
+//         margin: 10,
+//     }
+// })
